@@ -13,6 +13,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(require("./src/routes"))
 //sign up
 app.post("/signup", (req, res, next) => {
   var fullname = req.body.fullname;
