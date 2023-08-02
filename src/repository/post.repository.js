@@ -9,7 +9,8 @@ const post = (payload) => {
     content: payload.content,
     imglink: payload.imglink,
     tag: payload.tag,
-    username: payload.username
+    username: payload.username,
+    like:payload.like
   })
 }
 
