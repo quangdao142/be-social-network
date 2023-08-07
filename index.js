@@ -6,6 +6,10 @@ const db = require("./src/config/db");
 const bodyParser = require("body-parser");
 const expressjwt = require("express-jwt");
 const path = require("path")
+const socketIo = require('socket.io');
+const http = require("http");
+const server = http.createServer(app);
+const io = socketIo(server);
 
 db.connect();
 const port = 3000;

@@ -14,6 +14,14 @@ const post = (payload) => {
   })
 }
 
+const postArray = (payload) => {
+  let data = PostModel.find({
+    tag: payload
+  })
+  return data;
+};
+
 module.exports = {
-  post
+  post,
+  postArray
 }
