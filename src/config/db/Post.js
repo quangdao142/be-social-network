@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const Post = new Schema({
     username: String,
+    fullname: String,
     postId: String,
     content: String,
     imglink: String,
