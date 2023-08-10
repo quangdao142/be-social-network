@@ -1,9 +1,5 @@
-const db = require('../config/db')
-const PostModel = require('../config/db/Post')
-const UserModel = require('../config/db/User')
-
-
-db.connect()
+const PostModel = require('../models/Post')
+const UserModel = require('../models/User')
 
 const post = (payload) => {
   if (payload._id != null) {

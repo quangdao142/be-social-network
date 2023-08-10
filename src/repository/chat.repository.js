@@ -1,10 +1,5 @@
 const db = require('../config/db')
-const ChatModel = require('../config/db/Chat')
-
-
-db.connect()
-
-
+const ChatModel = require('../models/Chat')
 
 module.exports = {
   

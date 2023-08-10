@@ -1,7 +1,4 @@
-const db = require('../config/db')
-const UserModel = require('../config/db/User')
-
-db.connect()
+const UserModel = require('../models/User')
 
 const login = (payload) => {
   let data = UserModel.findOne({

@@ -1,7 +1,4 @@
-const db = require('../config/db')
-const CommentModel = require('../config/db/Comment')
-
-db.connect()
+const CommentModel = require('../models/Comment')
 
 const addComment = (payload) => {
   if (payload._id != null) {

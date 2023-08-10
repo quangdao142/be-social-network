@@ -3,24 +3,24 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const app = express();
-const db = require("./src/config/db");
 const bodyParser = require("body-parser");
 const expressjwt = require("express-jwt");
 const path = require("path")
 const socketIo = require('socket.io');
 const http = require("http");
 const env = require('./src/config/env');
+const { connectDb } = require('./src/models');
 const server = http.createServer(app);
 const io = socketIo(server);
 
 env.loadEnv();
 
-db.connect();
+connectDb();
 const port = env.data.Port;
 
 app.use(cors())
 // app.use("/images", express.static(__dirname + "./src/utils/images"));
-app.use("/images",express.static(path.resolve('./src/utils/images')))
+app.use("/images", express.static(path.resolve('./src/utils/images')))
 app.use(
   bodyParser.urlencoded({
     extended: false,

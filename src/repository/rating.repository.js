@@ -1,7 +1,4 @@
-const db = require("../config/db");
-const RatingModel = require("../config/db/Rating");
-
-db.connect();
+const RatingModel = require("../models/Rating");
 
 const ratingArray = (payload) => {
   let data = RatingModel.find({
