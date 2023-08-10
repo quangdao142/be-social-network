@@ -1,7 +1,5 @@
 const commentRepository = require("../repository/comment.repository");
 const Formatter = require("response-format");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const comment = async (req, res) => {
   try {
@@ -10,18 +8,16 @@ const comment = async (req, res) => {
     let data = await commentRepository.addComment(payload);
     res.json(Formatter.success(null, data))
   } catch (error) {
-    console.log(error);
-    res.json(Formatter.badRequest(error));
+    res.json(Formatter.internalError(error));
   }
 };
 
 const getComment = async (req, res) => {
   try {
     let comments = await commentRepository.getComment();
-    res.json(comments);
+    res.json(Formatter.success(comments));
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.json(Formatter.internalError(error));
   }
 }
 
@@ -31,13 +27,20 @@ const deleteComment = async (req, res) => {
     await commentRepository.deleteComment(commentId);
     res.json(Formatter.success("Delete comment successfully!", null));
   } catch (error) {
-    console.error(error);
-    res.status(500).json({message: 'Internal server error'});
+    res.json(Formatter.internalError(error));
+  }
+}
+
+const getCommentsByPostId = async (req, res) => {
+  try {
+    let postId = req.params.postId;
+    let comments = await commentRepository.findByPostId(postId);
+    res.json(Formatter.success(comments));
+  } catch (error) {
+    res.json(Formatter.internalError(error));
   }
 }
 
 module.exports = {
-  comment,
-  getComment,
-  deleteComment
+  comment, getComment, deleteComment, getCommentsByPostId
 };

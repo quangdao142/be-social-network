@@ -26,8 +26,13 @@ const deleteComment = (commentId) => {
   return CommentModel.findByIdAndDelete(commentId);
 }
 
+const findByPostId = (postId) => {
+  return CommentModel.find({"postId": postId});
+}
+
 module.exports = {
   addComment,
   getComment,
-  deleteComment
+  deleteComment,
+  findByPostId
 }
