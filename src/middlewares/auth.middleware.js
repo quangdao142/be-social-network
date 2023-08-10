@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     // Verify token
-    if (!token.startWith("Bearer ")) {
+    if (!token.startsWith("Bearer ")) {
       return Formatter.unAuthorized("Token is not valid")
     }
     const decoded = jwt.verify(token.replace("Bearer ", ""), env.data.JwtSecret);
