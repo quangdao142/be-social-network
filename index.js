@@ -16,7 +16,7 @@ const io = socketIo(server);
 env.loadEnv();
 
 db.connect();
-const port = 3000;
+const port = env.data.Port;
 
 app.use(cors())
 // app.use("/images", express.static(__dirname + "./src/utils/images"));
