@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Formatter = require("response-format");
+const env = require('../config/env');
 
 
 const authMiddleware = (req, res, next) => {
@@ -13,7 +14,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token.replace("Bearer ", ""), env.data.JwtSecret);
     // Add user from payload to request object\
     req.userId = decoded.userId;
     req.username = decoded.username;
