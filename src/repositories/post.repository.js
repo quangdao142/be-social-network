@@ -1,5 +1,5 @@
-const PostModel = require('../models/Post')
-const UserModel = require('../models/User')
+const PostModel = require('../models/post.model')
+const UserModel = require('../models/user.model')
 
 const post = (payload) => {
   if (payload._id != null) {

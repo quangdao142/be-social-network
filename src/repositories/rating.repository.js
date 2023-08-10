@@ -1,4 +1,4 @@
-const RatingModel = require("../models/Rating");
+const RatingModel = require("../models/rating.model");
 
 const ratingArray = (payload) => {
   let data = RatingModel.find({

@@ -8,9 +8,10 @@ const Post = new Schema({
     content: String,
     imglink: String,
     tag: String,
-    like: String
+    like: String,
   },{
-    collection: 'posts'
+    collection: 'posts',
+    timestamps: true,
   })
 
 const PostModel = mongoose.model('Post',Post)

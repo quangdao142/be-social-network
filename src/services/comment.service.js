@@ -1,4 +1,4 @@
-const commentRepository = require("../repository/comment.repository");
+const commentRepository = require("../repositories/comment.repository");
 const Formatter = require("response-format");
 
 const comment = async (req, res) => {

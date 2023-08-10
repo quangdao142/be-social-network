@@ -1,4 +1,4 @@
-const authRepository = require("../repository/auth.repository");
+const authRepository = require("../repositories/auth.repository");
 const Formatter = require("response-format");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

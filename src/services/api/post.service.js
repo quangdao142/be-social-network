@@ -1,21 +1,21 @@
-const postRepository = require("../repositories/post.repository");
-const interestRepository = require("../repositories/interest.repository");
+const postRepository = require("../../repositories/post.repository");
 const Formatter = require("response-format");
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
-const post = async (req, res) => {
+const Post = async (req, res) => {
   try {
     let payload = req.body;
-    payload.userId = req.userId;
-    payload.username = req.username;
-    payload.fullname = req.fullname;
+
+    console.log("req.user: ", req.user)
+    payload.username = req.user.username;
+    payload.fullname = req.user.fullname;
 
     if (payload.imglink) {
       payload.imglink = req.body.imglink;
     }
 
     let data = await postRepository.post(payload);
-    let hashtags = payload.content.match(/#[a-z0-9_]+/g)
-    await interestRepository.addTags(payload.userId, hashtags)
 
     res.json(Formatter.success(null, data));
   } catch (error) {
@@ -42,7 +42,7 @@ const getPost = async (req, res) => {
 const getPostByUser = async (req, res) => {
   try {
     let payload = req.query.username;
-    let items = await postRepository.getPostByUser(payload);
+    let items = await postRepository.getPostbyUser(payload);
     res.json(items);
   } catch (error) {
     console.error(error);
@@ -65,7 +65,7 @@ const deletePost = async (req, res) => {
 
 
 module.exports = {
-  post,
+  Post,
   getPost,
   getPostByUser,
   deletePost
