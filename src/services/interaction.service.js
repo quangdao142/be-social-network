@@ -1,8 +1,15 @@
 const interactionRepository = require('../repositories/interaction.repository');
+const postRepository = require('../repositories/post.repository');
+const interestRepository = require('../repositories/interest.repository');
 
 const addInteraction = async (req, res) => {
   try {
     const interaction = await interactionRepository.addInteraction(req.body);
+    const post = await postRepository.findById(req.body.postId)
+    let hashtags = post.content.match(/#[a-z0-9_]+/g)
+    if (hashtags != null && hashtags.length !== 0) {
+      await interestRepository.increaseInteractPoint(req.body.userId, hashtags)
+    }
     res.status(201).json(interaction);
   } catch (err) {
     res.status(400).json({ message: err.message });

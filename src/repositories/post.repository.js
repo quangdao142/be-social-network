@@ -54,11 +54,17 @@ const deletePost = (postId) => {
   return data
 };
 
+const findById = (postId) => {
+  return PostModel.findOne({
+    _id: postId
+  })
+}
 module.exports = {
   post,
   postArray,
   getPost,
   getFullname,
   getPostByUser,
-  deletePost
+  deletePost,
+  findById
 }

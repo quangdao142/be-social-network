@@ -5,19 +5,21 @@ const Formatter = require("response-format");
 const post = async (req, res) => {
   try {
     let payload = req.body;
-    payload.userId = req.userId;
-    payload.username = req.username;
-    payload.fullname = req.fullname;
+      payload.userId = req.userId;
+      payload.username = req.username;
+      payload.fullname = req.fullname;
 
-    if (payload.imglink) {
-      payload.imglink = req.body.imglink;
-    }
+      if (payload.imglink) {
+          payload.imglink = req.body.imglink;
+      }
 
-    let data = await postRepository.post(payload);
-    let hashtags = payload.content.match(/#[a-z0-9_]+/g)
-    await interestRepository.addTags(payload.userId, hashtags)
+      let data = await postRepository.post(payload);
+      let hashtags = payload.content.match(/#[a-z0-9_]+/g)
+      if (hashtags != null && hashtags.length !== 0) {
+          let x = await interestRepository.addTags(payload.userId, hashtags)
+      }
 
-    res.json(Formatter.success(null, data));
+      res.json(Formatter.success(null, data));
   } catch (error) {
     console.log(error);
     res.json(Formatter.badRequest(error));
