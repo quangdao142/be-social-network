@@ -3,13 +3,11 @@ const Formatter = require("response-format");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const Comment = async (req, res) => {
+const comment = async (req, res) => {
   try {
     let payload = req.body;
-    console.log(payload)
-    payload.fullname = jwt.verify(req.headers.authorization, 'quangdao').fullname
+    payload.fullname = req.fullname
     let data = await commentRepository.addComment(payload);
-    // res.json(data)
     res.json(Formatter.success(null, data))
   } catch (error) {
     console.log(error);
@@ -20,7 +18,6 @@ const Comment = async (req, res) => {
 const getComment = async (req, res) => {
   try {
     let comments = await commentRepository.getComment();
-    console.log(comments)
     res.json(comments);
   } catch (error) {
     console.error(error);
@@ -28,18 +25,19 @@ const getComment = async (req, res) => {
   }
 }
 
-const deletecomment = async (req, res) => {
+const deleteComment = async (req, res) => {
   try {
     let commentId = req.params.id;
-    let comments = await commentRepository.deleteComment(commentId);
+    await commentRepository.deleteComment(commentId);
     res.json(Formatter.success("Delete comment successfully!", null));
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({message: 'Internal server error'});
   }
 }
 
 module.exports = {
-  Comment,
-  getComment
+  comment,
+  getComment,
+  deleteComment
 };

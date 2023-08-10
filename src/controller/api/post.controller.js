@@ -3,13 +3,11 @@ const Formatter = require("response-format");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 
-const Post = async (req, res) => {
+const post = async (req, res) => {
   try {
     let payload = req.body;
-
-    console.log("req.user: ", req.user)
-    payload.username = req.user.username;
-    payload.fullname = req.user.fullname;
+    payload.username = req.username;
+    payload.fullname = req.fullname;
 
     if (payload.imglink) {
       payload.imglink = req.body.imglink;
@@ -42,7 +40,7 @@ const getPost = async (req, res) => {
 const getPostByUser = async (req, res) => {
   try {
     let payload = req.query.username;
-    let items = await postRepository.getPostbyUser(payload);
+    let items = await postRepository.getPostByUser(payload);
     res.json(items);
   } catch (error) {
     console.error(error);
@@ -65,7 +63,7 @@ const deletePost = async (req, res) => {
 
 
 module.exports = {
-  Post,
+  post,
   getPost,
   getPostByUser,
   deletePost

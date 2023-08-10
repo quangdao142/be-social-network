@@ -14,9 +14,9 @@ const authMiddleware = (req, res, next) => {
   try {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded);
     // Add user from payload to request object
-    req.user = decoded.user;
+    req.username = decoded.username;
+    req.fullname = decoded.fullname;
     next();
   } catch (err) {
     return Formatter.unAuthorized("Token is not valid")

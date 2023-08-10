@@ -9,7 +9,6 @@ const addComment = (payload) => {
       postId: payload.postId,
       fullname: payload.fullname,
       username: payload.username,
-      fullname: payload.fullname,
       content: payload.content
     })
   }
@@ -17,7 +16,6 @@ const addComment = (payload) => {
     postId: payload.postId,
     fullname: payload.fullname,
     username: payload.username,
-    fullname: payload.fullname,
     content: payload.content
   })
 }
