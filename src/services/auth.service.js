@@ -12,7 +12,7 @@ const Login = async (req, res) => {
     let user_info = {userId: data._id, fullname: data.fullname, username: data.username};
     // console.log(data)
     // res.json(Formatter.success(null, data))
-    let token = jwt.sign(user_info, env.data.JWTSecret);
+    let token = jwt.sign(user_info, env.data.JwtSecret);
     console.log(token);
     res.json(Formatter.success(undefined, {token}));
   } catch (error) {

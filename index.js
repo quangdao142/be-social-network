@@ -2,16 +2,16 @@ require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors')
-const app = express();
 const bodyParser = require("body-parser");
 const expressjwt = require("express-jwt");
 const path = require("path")
-const socketIo = require('socket.io');
+const socket = require('socket.io');
 const http = require("http");
 const env = require('./src/config/env');
 const { connectDb } = require('./src/models');
-const server = http.createServer(app);
-const io = socketIo(server);
+const chatService = require('./src/services/chat.service');
+
+const app = express();
 
 env.loadEnv();
 
@@ -35,6 +35,18 @@ app.use(require("./src/routes"))
 // })
 // )
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+// chatService(server);
+
+
+
+const server = app.listen(port, () =>
+  console.log(`Server started on ${port}`)
+);
+
+chatService(server);
+// const io = socket(server, {
+//   cors: {
+//     origin: "http://localhost:8080",
+//     credentials: true,
+//   },
+// });
