@@ -10,7 +10,8 @@ const Post = new Schema({
     tag: String,
     like: String,
   },{
-    collection: 'posts'
+    collection: 'posts',
+    timestamps: true,
   })
 
 const PostModel = mongoose.model('Post',Post)

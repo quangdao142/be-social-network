@@ -9,6 +9,7 @@ const User = new Schema(
   },
   {
     collection: "users",
+    timestamps: true,
   }
 );
 

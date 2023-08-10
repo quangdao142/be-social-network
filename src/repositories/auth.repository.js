@@ -1,4 +1,4 @@
-const UserModel = require('../models/User')
+const UserModel = require('../models/user.model')
 
 const login = (payload) => {
   let data = UserModel.findOne({

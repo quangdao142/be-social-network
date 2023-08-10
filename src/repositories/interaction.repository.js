@@ -1,4 +1,4 @@
-const InteractionModel = require('../models/Interaction');
+const InteractionModel = require('../models/interaction.model');
 
 const addInteraction = (payload) => {
   if (payload._id != null) {

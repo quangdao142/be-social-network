@@ -1,31 +1,35 @@
-const express = require("express");
-const chatRepository = require("../../repositories/chat.repository");
-const Formatter = require("response-format");
-const app = express();
-const socketIo = require('socket.io');
-const http = require("http");
-const server = http.createServer(app);
-const io = socketIo(server);
+const socketio = require('socket.io');
+const ChatModel = require('../models/message.model');
 
-io.on("connection", (socket) => {
-  console.log("A user connected");
+module.exports = (server) => {
+  const io = socketio(server);
 
-  socket.on("chat message", (msg) => {
-    console.log("Message received:", msg);
+  io.on('connection', (socket) => {
+    console.log('A user connected');
 
-    const message = new Message({
-      content: msg,
-      timestamp: new Date(),
+    // Join a room
+    socket.on('join', (roomId) => {
+      socket.join(roomId);
+      console.log(`User joined room ${roomId}`);
     });
 
-    message.save();
+    // Leave a room
+    socket.on('leave', (roomId) => {
+      socket.leave(roomId);
+      console.log(`User left room ${roomId}`);
+    });
 
-    io.emit("chat message", msg);
+    // Send a message
+    socket.on('message', async (data) => {
+      const { roomId, message, userId } = data;
+      const chat = new ChatModel({ roomId, message, userId });
+      await chat.save();
+      io.to(roomId).emit('message', chat);
+    });
+
+    // Disconnect
+    socket.on('disconnect', () => {
+      console.log('A user disconnected');
+    });
   });
-
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
-});
-
-module.exports = {};
+};

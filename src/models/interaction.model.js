@@ -11,6 +11,7 @@ const Interaction = new Schema(
   },
   {
     collection: "interaction",
+    timestamps: true,
   }
 );
 

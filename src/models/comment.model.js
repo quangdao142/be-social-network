@@ -8,7 +8,8 @@ const Comment = new Schema({
     fullname: String,
     content: String
   },{
-    collection: 'comments'
+    collection: 'comments',
+    timestamps: true,
   })
 
 const CommentModel = mongoose.model('Comment',Comment)

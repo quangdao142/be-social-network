@@ -1,4 +1,4 @@
-const CommentModel = require('../models/Comment')
+const CommentModel = require('../models/comment.model')
 
 const addComment = (payload) => {
   if (payload._id != null) {

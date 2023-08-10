@@ -6,7 +6,8 @@ const Rating = new Schema({
     tag: String,
     rating: String
   },{
-    collection: 'ratings'
+    collection: 'ratings',
+    timestamps: true,
   })
 
 const RatingModel = mongoose.model('Rating',Rating)
