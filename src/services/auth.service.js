@@ -8,7 +8,7 @@ const Login = async (req, res) => {
     // console.log(req.body)
     let payload = req.body;
     let data = await authRepository.login(payload);
-    let user_info = { fullname: data.fullname, username: data.username };
+    let user_info = {userId: data._id, fullname: data.fullname, username: data.username};
     // console.log(data)
     // res.json(Formatter.success(null, data))
     let token = jwt.sign(user_info, "quangdao");
