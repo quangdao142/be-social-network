@@ -9,8 +9,11 @@ const expressjwt = require("express-jwt");
 const path = require("path")
 const socketIo = require('socket.io');
 const http = require("http");
+const env = require('./src/config/env');
 const server = http.createServer(app);
 const io = socketIo(server);
+
+env.loadEnv();
 
 db.connect();
 const port = 3000;

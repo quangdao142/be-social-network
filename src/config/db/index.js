@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
+const env = require('../env')
 
 async function connect() {
     try {
-        await mongoose.connect('mongodb://goldfever:goldfever123@localhost:27017/?authMechanism=DEFAULT',{
+        await mongoose.connect(env.data.MongoDBUrl,{
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
