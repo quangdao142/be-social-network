@@ -1,4 +1,4 @@
-const InterestModel = require('../models/Interest')
+const InterestModel = require('../models/interest.model')
 
 const addTags = (userId, tags) => {
     let interests = [];

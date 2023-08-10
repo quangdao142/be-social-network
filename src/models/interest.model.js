@@ -8,5 +8,5 @@ const Interest = new Schema({
     collection: 'interests'
 })
 
-const InterestModel = mongoose.model('Interest', Interest)
+const InterestModel = mongoose.model('InterestModel', Interest)
 module.exports = InterestModel
