@@ -14,6 +14,9 @@ const authMiddleware = (req, res, next) => {
 
   try {
     // Verify token
+    if (!token.startWith("Bearer ")) {
+      return Formatter.unAuthorized("Token is not valid")
+    }
     const decoded = jwt.verify(token.replace("Bearer ", ""), env.data.JwtSecret);
     // Add user from payload to request object\
     req.userId = decoded.userId;
