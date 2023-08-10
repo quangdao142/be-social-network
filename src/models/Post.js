@@ -8,7 +8,7 @@ const Post = new Schema({
     content: String,
     imglink: String,
     tag: String,
-    like: String
+    like: String,
   },{
     collection: 'posts'
   })

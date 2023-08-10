@@ -1,5 +1,5 @@
 const express = require("express");
-const chatRepository = require("../../repository/chat.repository");
+const chatRepository = require("../../repositories/chat.repository");
 const Formatter = require("response-format");
 const app = express();
 const socketIo = require('socket.io');

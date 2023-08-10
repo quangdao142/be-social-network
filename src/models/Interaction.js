@@ -1,16 +1,18 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
+const InteractionType = require('../consts/InteractionType.const');
 const Schema = mongoose.Schema;
 
 const Interaction = new Schema(
   {
-    fullname: String,
-    username: String,
-    password: String
+    userId: ObjectId,
+    postId: ObjectId,
+    interactionType: InteractionType
   },
   {
-    collection: "users",
+    collection: "interaction",
   }
 );
 
-const UserModel = mongoose.model("User", User);
-module.exports = UserModel;
+const InteractionModel = mongoose.model("Interaction", Interaction);
+module.exports = InteractionModel;
