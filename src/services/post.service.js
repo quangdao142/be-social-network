@@ -1,4 +1,4 @@
-const postRepository = require("../../repository/post.repository");
+const postRepository = require("../repository/post.repository");
 const Formatter = require("response-format");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");

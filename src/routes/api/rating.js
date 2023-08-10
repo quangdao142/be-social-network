@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const RatingController = require('../../controller/api/rating.controller')
+const RatingController = require('../../services/rating.service')
 
 router.route("/rating").post(RatingController.RatingArray)
 

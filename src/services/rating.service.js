@@ -1,5 +1,5 @@
-const ratingRepository = require('../../repository/rating.repository')
-const postRepository = require('../../repository/post.repository')
+const ratingRepository = require('../repository/rating.repository')
+const postRepository = require('../repository/post.repository')
 const Formatter = require('response-format')
 const bcrypt =  require('bcrypt')
 const jwt = require('jsonwebtoken')

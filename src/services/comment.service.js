@@ -1,4 +1,4 @@
-const commentRepository = require("../../repository/comment.repository");
+const commentRepository = require("../repository/comment.repository");
 const Formatter = require("response-format");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

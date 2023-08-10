@@ -1,4 +1,4 @@
-const authRepository = require("../../repository/auth.repository");
+const authRepository = require("../repository/auth.repository");
 const Formatter = require("response-format");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -25,7 +25,7 @@ const Register = async (req, res) => {
     let payload = req.body;
     let findExist = await authRepository.checkExist(payload.username);
     if (findExist) {
-      res.json({ error: true, message: "Username da ton tai" });
+      res.json({ error: true, message: "username existed" });
     } else {
       let data = await authRepository.register(payload);
       let user_info = { fullname: data.fullname, username: data.username };

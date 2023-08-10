@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const CommentController = require('../../controller/api/comment.controller')
+const CommentController = require('../../services/comment.service')
 
 router.route("/comment").post(CommentController.comment)
 router.route("/comment").get(CommentController.getComment)
