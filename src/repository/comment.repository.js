@@ -4,6 +4,15 @@ const CommentModel = require('../config/db/Comment')
 db.connect()
 
 const addComment = (payload) => {
+  if (payload._id != null) {
+    return CommentModel.findByIdAndUpdate({ _id: payload._id }, {
+      postId: payload.postId,
+      fullname: payload.fullname,
+      username: payload.username,
+      fullname: payload.fullname,
+      content: payload.content
+    })
+  }
   return CommentModel.create({
     postId: payload.postId,
     fullname: payload.fullname,
@@ -16,9 +25,14 @@ const addComment = (payload) => {
 const getComment = () => {
   let data = CommentModel.find()
   return data
-};
+}
+
+const deleteComment = (commentId) => {
+  return CommentModel.findByIdAndDelete(commentId);
+}
 
 module.exports = {
   addComment,
-  getComment
+  getComment,
+  deleteComment
 }

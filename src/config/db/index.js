@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 async function connect() {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/social-network',{
+        await mongoose.connect('mongodb://goldfever:goldfever123@localhost:27017/?authMechanism=DEFAULT',{
             useNewUrlParser: true,
             useUnifiedTopology: true
         })

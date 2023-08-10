@@ -6,11 +6,10 @@ const multer = require("multer");
 const Post = async (req, res) => {
   try {
     let payload = req.body;
-    console.log(payload);
 
-    const decodedToken = jwt.verify(req.headers.authorization, "quangdao");
-    payload.username = decodedToken.username;
-    payload.fullname = decodedToken.fullname;
+    console.log("req.user: ", req.user)
+    payload.username = req.user.username;
+    payload.fullname = req.user.fullname;
 
     if (payload.imglink) {
       payload.imglink = req.body.imglink;
@@ -40,12 +39,10 @@ const getPost = async (req, res) => {
   }
 };
 
-const getPostbyUser = async (req, res) => {
+const getPostByUser = async (req, res) => {
   try {
     let payload = req.query.username;
-    console.log(payload);
     let items = await postRepository.getPostbyUser(payload);
-    console.log(items);
     res.json(items);
   } catch (error) {
     console.error(error);
@@ -54,14 +51,14 @@ const getPostbyUser = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  try{
+  try {
     let postId = req.params.id;
     let post = await postRepository.deletePost(postId)
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });
     }
     res.status(200).json({ message: 'Post deleted successfully' });
-  }catch{
+  } catch {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -70,6 +67,6 @@ const deletePost = async (req, res) => {
 module.exports = {
   Post,
   getPost,
-  getPostbyUser,
+  getPostByUser,
   deletePost
 };

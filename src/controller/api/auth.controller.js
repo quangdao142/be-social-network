@@ -13,7 +13,7 @@ const Login = async (req, res) => {
     // res.json(Formatter.success(null, data))
     let token = jwt.sign(user_info, "quangdao");
     console.log(token);
-    res.json({ token });
+    res.json(Formatter.success(undefined, {token}));
   } catch (error) {
     console.log(error);
     res.json(Formatter.badRequest(error));

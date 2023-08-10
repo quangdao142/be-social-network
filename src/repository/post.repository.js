@@ -6,13 +6,23 @@ const UserModel = require('../config/db/User')
 db.connect()
 
 const post = (payload) => {
+  if (payload._id != null) {
+    return PostModel.findByIdAndUpdate({ _id: payload._id }, {
+      content: payload.content,
+      imglink: payload.imglink,
+      tag: payload.tag,
+      username: payload.username,
+      fullname: payload.fullname,
+      like: payload.like
+    });
+  }
   return PostModel.create({
     content: payload.content,
     imglink: payload.imglink,
     tag: payload.tag,
     username: payload.username,
     fullname: payload.fullname,
-    like:payload.like
+    like: payload.like
   })
 }
 
@@ -30,20 +40,20 @@ const getPost = () => {
 
 const getFullname = (username) => {
   let data = UserModel.find({
-    username : username
+    username: username
   })
   return data.fullname
 }
 
-const getPostbyUser = (username) => {
+const getPostByUser = (username) => {
   let data = PostModel.find({
-    username : username
+    username: username
   })
   // console.log(data.items)
   return data
 };
 
-const deletePost = (postID) => {
+const deletePost = (postId) => {
   let data = PostModel.findByIdAndDelete(postId)
   return data
 };
@@ -53,6 +63,6 @@ module.exports = {
   postArray,
   getPost,
   getFullname,
-  getPostbyUser,
+  getPostByUser,
   deletePost
 }
