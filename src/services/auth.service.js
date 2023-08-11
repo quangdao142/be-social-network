@@ -30,7 +30,7 @@ const Register = async (req, res) => {
     } else {
       let data = await authRepository.register(payload);
       let user_info = { fullname: data.fullname, username: data.username };
-      let token = jwt.sign(user_info, "quangdao");
+      let token = jwt.sign(user_info, env.data.JwtSecret);
       console.log(token);
       res.json({ token });
       // res.json(Formatter.success(null, data))
